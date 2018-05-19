@@ -1,0 +1,1 @@
+create database big_data_indexing;
