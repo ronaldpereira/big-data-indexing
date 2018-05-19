@@ -26,6 +26,15 @@ class databaseConnection():
             self.db.rollback()
             return "Error: unable to delete. From sql: " + sqlCommand
 
+    def execute(self, sqlCommand):
+        try:
+            self.cursor.execute(sqlCommand)
+            self.db.commit()
+            return "Success"
+        except:
+            self.db.rollback()
+            return "Error: unable to execute. From sql: " + sqlCommand
+
     def insert(self, sqlCommand):
         try:
             self.cursor.execute(sqlCommand)
@@ -59,3 +68,11 @@ class databaseConnection():
         except:
             self.db.rollback()
             return "Error: unable to update. From sql: " + sqlCommand
+
+    def getIndexes(self, tableName):
+        try:
+            self.cursor.execute("SHOW INDEXES FROM %s;" %tableName)
+            return self.cursor.fetchall()
+        except:
+            return "Error: unable to get indexes from table " + tableName
+            
