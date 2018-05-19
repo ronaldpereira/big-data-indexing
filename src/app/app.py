@@ -4,4 +4,8 @@ import databaseConnection as dbConn
 
 db = dbConn.databaseConnection()
 
-print(db.select("select * from user_information limit 1000")[0])
+selectResp = db.select("select * from user_information")[:]
+
+for row in selectResp:
+    print(row['id'])
+
