@@ -10,6 +10,6 @@ create table user_information (
 	hash VARCHAR(255),
 	company_name VARCHAR(255),
 	background_color VARCHAR(50),
-	create_time DATE,
-	update_time DATE
+	create_time DATETIME,
+	update_time DATETIME
 );

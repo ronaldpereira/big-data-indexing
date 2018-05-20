@@ -14,7 +14,7 @@ class randomGenerator:
     def generateRandomHexString(self, length = 0):
         return ''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(length)).lower()
 
-    def generateRandomDatetime(self, min_year=1900, max_year=datetime.now().year):
+    def generateRandomDatetime(self, min_year=1970, max_year=datetime.now().year):
         # generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
         start = datetime(min_year, 1, 1, 00, 00, 00)
         years = max_year - min_year + 1
@@ -27,15 +27,15 @@ class randomGenerator:
         return actualID
 
     def getUsername(self):
-        length = random.randint(1, 20)
+        length = random.randint(5, 20)
         return self.generateRandomString(length)
 
     def getFirstOrLastName(self):
-        length = random.randint(1, 20)
+        length = random.randint(5, 20)
         return self.generateRandomString(length).capitalize()
 
     def getEmail(self):
-        length = random.randint(1, 20)
+        length = random.randint(5, 20)
         return self.generateRandomString(length) + "@" + self.generateRandomString(length) + ".com"
 
     def getGender(self):
@@ -53,29 +53,29 @@ class randomGenerator:
         for i in range(8):
             if i != 0:
                 hexString += ":"
-            hexString += rng.generateRandomHexString(4)
+            hexString += self.generateRandomHexString(4)
 
         return hexString
 
     def getHash(self):
-        return rng.generateRandomHexString(64)
+        return self.generateRandomHexString(64)
 
     def getCompanyName(self):
         length = random.randint(5, 20)
-        return rng.generateRandomString(length).capitalize()
+        return self.generateRandomString(length).capitalize()
 
     def getBackgroundColor(self):
-        return "#" + rng.generateRandomHexString(6)
+        return "#" + self.generateRandomHexString(6)
 
     def getCreateTime(self):
-        return str(rng.generateRandomDatetime())
+        return str(self.generateRandomDatetime()).split(".")[0]
 
     def getUpdateTime(self):
         rng = random.randint(0, 9)
-        return "'" + str(self.generateRandomDatetime()) + "');" if (rng >= 2) else "null);"
+        return "'" + str(self.generateRandomDatetime()).split(".")[0] + "');" if (rng >= 2) else "null);"
 
 
-with open("../sql/randomDataInsert.sql", "w") as dataFile:
+with open("../sql/user_information_random_data_insert.sql", "w") as dataFile:
     rng = randomGenerator(int(sys.argv[1]))
 
     iterations = 0
