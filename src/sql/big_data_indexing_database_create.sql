@@ -1,1 +1,1 @@
-create database big_data_indexing;
+create schema big_data_indexing;

@@ -4,7 +4,7 @@ import pymysql
 
 class databaseConnection():
     def __init__(self):
-        self.db = pymysql.connect("localhost", "root", "", "big_data_indexing")
+        self.db = pymysql.connect("localhost", "ronald", "", "big_data_indexing")
         self.cursor = self.db.cursor()
     
     def closeConnection(self):
