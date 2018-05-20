@@ -75,7 +75,7 @@ class randomGenerator:
         return "'" + str(self.generateRandomDatetime()).split(".")[0] + "');" if (rng >= 2) else "null);"
 
 
-with open("../sql/user_information_random_data_insert.sql", "w") as dataFile:
+with open("../sql/user_information_random_data_insert.sql", "a") as dataFile:
     rng = randomGenerator(int(sys.argv[1]))
 
     iterations = 0
