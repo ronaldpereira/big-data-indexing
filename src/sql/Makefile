@@ -4,6 +4,7 @@ all:
 	make create_table
 	make insert_data
 	make convert_timestamp
+	make mysql
 
 create_database:
 	mysql < big_data_indexing_database_create.sql
@@ -18,4 +19,7 @@ convert_timestamp:
 	mysql big_data_indexing < user_information_convert_time.sql
 
 drop_all:
-	mysql -e 'drop database big_data_indexing;'
+	mysql < big_data_indexing_database_drop.sql
+
+mysql:
+	mysql big_data_indexing
