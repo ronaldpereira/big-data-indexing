@@ -3,6 +3,7 @@ import math
 import random
 import string
 import sys
+import databaseConnection
 
 class randomGenerator:
     def __init__(self, initialID):
@@ -75,33 +76,30 @@ class randomGenerator:
         return "'" + str(self.generateRandomDatetime()).split(".")[0] + "');" if (rng >= 2) else "null);"
 
 
-with open("../sql/user_information_random_data_insert.sql", "a") as dataFile:
-    rng = randomGenerator(int(sys.argv[1]))
+rng = randomGenerator(int(sys.argv[2]))
+db = databaseConnection.databaseConnection()
 
-    iterations = 0
-    while True if len(sys.argv) <= 2 else (True if iterations < int(sys.argv[2]) + 1 else False):
-        if(iterations % 1000 == 0):
-            print(iterations, "random inserts generated.")
-            
+iterations = 0
+while True if len(sys.argv) <= 3 else (True if iterations < int(sys.argv[3]) else False):
+    if(iterations % 1000 == 0):
+        print(iterations, "data inserted.")
+        
+    sql = "insert into user_information "
+    sql += "(id, username, first_name, last_name, email, gender, ip_address_v4, ip_address_v6, hash, company_name, background_color, create_time, update_time) "
+    sql += "values ("
+    sql += str(rng.getID()) + ", "
+    sql += "'" + rng.getUsername() + "', "
+    sql += "'" + rng.getFirstOrLastName() + "', "
+    sql += "'" + rng.getFirstOrLastName() + "', "
+    sql += "'" + rng.getEmail() + "', "
+    sql += "'" + rng.getGender() + "', "
+    sql += "'" + rng.getIPV4() + "', "
+    sql += "'" + rng.getIPV6() + "', "
+    sql += "'" + rng.getHash() + "', "
+    sql += "'" + rng.getCompanyName() + "', "
+    sql += "'" + rng.getBackgroundColor() + "', "
+    sql += "'" + rng.getCreateTime() + "', "
+    sql += rng.getUpdateTime()
 
-        sql = "insert into user_information "
-        sql += "(id, username, first_name, last_name, email, gender, ip_address_v4, ip_address_v6, hash, company_name, background_color, create_time, update_time) "
-        sql += "values ("
-        sql += str(rng.getID()) + ", "
-        sql += "'" + rng.getUsername() + "', "
-        sql += "'" + rng.getFirstOrLastName() + "', "
-        sql += "'" + rng.getFirstOrLastName() + "', "
-        sql += "'" + rng.getEmail() + "', "
-        sql += "'" + rng.getGender() + "', "
-        sql += "'" + rng.getIPV4() + "', "
-        sql += "'" + rng.getIPV6() + "', "
-        sql += "'" + rng.getHash() + "', "
-        sql += "'" + rng.getCompanyName() + "', "
-        sql += "'" + rng.getBackgroundColor() + "', "
-        sql += "'" + rng.getCreateTime() + "', "
-        sql += rng.getUpdateTime()
-
-        dataFile.write(sql + "\n")
-        iterations += 1
-
-dataFile.close()
+    db.insert(sql)
+    iterations += 1
