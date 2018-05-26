@@ -6,4 +6,3 @@ alter table user_information drop column create_time;
 alter table user_information drop column update_time;
 alter table user_information change column create_time_placeholder create_time int(8);
 alter table user_information change column update_time_placeholder update_time int(8);
-
