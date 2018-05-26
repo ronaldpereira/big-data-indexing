@@ -19,7 +19,7 @@ create_table:
 	mysql big_data_indexing < user_information_table_create.sql
 
 insert_random_data:
-	cd ../app && python3 dataInsertCreator.py databaseConnection.py 1 50000
+	cd ../app && python3 dataInsertCreator.py databaseConnection.py 1
 
 insert_mock_data:
 	mysql big_data_indexing < user_information_mock_data_insert.sql
