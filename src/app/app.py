@@ -4,7 +4,6 @@ import databaseConnection as dbConn
 
 db = dbConn.databaseConnection()
 
-selectResp = db.select("select * from user_information")
+selectResp = db.select("select max(id) from user_information")
 
-for row in selectResp:
-    print(row['create_time'])
+print(selectResp)

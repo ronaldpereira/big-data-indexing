@@ -83,8 +83,8 @@ db = databaseConnection.databaseConnection()
 
 iterations = 0
 while True if len(sys.argv) <= 3 else (True if iterations < int(sys.argv[3]) else False):
-    if(iterations % 1000 == 0):
-        print(iterations, "data inserted.")
+    if(rng.id % 1000 == 0):
+        print(rng.id, "total data inserted.")
         
     sql = "insert into user_information "
     sql += "(id, username, first_name, last_name, email, gender, ip_address_v4, ip_address_v6, hash, company_name, background_color, create_time, update_time) "
