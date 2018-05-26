@@ -6,4 +6,4 @@ db = dbConn.databaseConnection()
 
 selectResp = db.select("select max(id) from user_information")
 
-print(selectResp)
+print("The last inserted id is:", selectResp[0]['id'], "\nThe next id to insert is:", selectResp[0]['id']+1)
